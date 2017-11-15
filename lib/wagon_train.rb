@@ -29,7 +29,7 @@ class WagonTrain
     @list.supplies
   end
 
-    def to_string
-    @list.to_string
-    end
+  def to_string
+  @list.to_string
+  end
 end

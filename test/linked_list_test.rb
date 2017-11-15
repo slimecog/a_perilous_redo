@@ -129,4 +129,18 @@ class LinkedListTest < Minitest::Test
 
     assert_equal "The McKinney family, followed by the Lawson family", list.to_string
   end
+
+  def test_supplies_can_be_added_and_keys_not_duplicated
+    list = LinkedList.new
+    list.append("Burke", {"pounds of food" => 200})
+    list.append("Hardy", {"spare wagon wheels" => 3})
+    list.prepend("McKinney", {"spare wagon wheels" => 3})
+    list.insert(1, "Lawson", {"spare wagon axles" => 3})
+
+    assert_instance_of Hash, list.supplies
+    assert_equal "pounds of food", list.supplies.first.first
+    assert_equal 200, list.supplies.first.last
+    assert_equal 6, list.supplies["spare wagon wheels"]
+  end
+
 end
