@@ -30,6 +30,6 @@ class WagonTrain
   end
 
   def to_string
-  @list.to_string
+    @list.to_string
   end
 end
