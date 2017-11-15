@@ -26,19 +26,52 @@ class WagonTrainTest < Minitest::Test
   def test_WTs_linked_list_is_appendable
     wt = WagonTrain.new
 
-    wt.append("Burke")
-    wt.append("West")
+    wt.append("Burke", {"pounds of food" => 200})
+    wt.append("Hardy", {"spare wagon wheels" => 3})
 
     assert_equal "Burke", wt.list.head.surname
-    assert_equal "West", wt.list.head.next_node.surname
+    assert_equal "Hardy", wt.list.head.next_node.surname
   end
 
   def test_WTs_linked_list_can_be_counted
     wt = WagonTrain.new
 
-    wt.append("Burke")
-    wt.append("West")
+    wt.append("Burke", {"pounds of food" => 200})
+    wt.append("Hardy", {"spare wagon wheels" => 3})
 
     assert_equal 2, wt.count
   end
+
+  def test_prepend_and_insert_work
+    wt = WagonTrain.new
+
+    wt.append("Burke", {"pounds of food" => 200})
+    wt.append("Hardy", {"spare wagon wheels" => 3})
+    wt.prepend("McKinney", {"spare wagon wheels" => 3})
+    wt.insert(1, "Lawson", {"spare wagon axles" => 3})
+
+    assert_equal 4, wt.count
+    assert_equal "McKinney", wt.list.head.surname
+    assert_equal "Lawson", wt.list.head.next_node.surname
+    assert_equal "Burke", wt.list.head.next_node.next_node.surname
+    assert_equal "Hardy", wt.list.head.next_node.next_node.next_node.surname
+  end
+
+  def test_wagon_supplies_can_be_totaled_can_keys_not_duplicated
+    wt = WagonTrain.new
+
+    wt.append("Burke", {"pounds of food" => 200})
+    wt.append("Hardy", {"spare wagon wheels" => 3})
+    wt.prepend("McKinney", {"spare wagon wheels" => 3})
+    wt.insert(1, "Lawson", {"spare wagon axles" => 3})
+
+    assert_instance_of Hash, wt.supplies
+    assert_equal "pounds of food", wt.supplies.first.first
+    assert_equal 200, wt.supplies.first.last
+    assert_equal 6, wt.supplies["spare wagon wheels"]
+  end
+
+
+
+
 end

@@ -2,7 +2,8 @@ class LinkedList
   attr_reader :head
 
   def initialize
-    @head = head
+    @head     = head
+    @supplies = Hash.new(0)
   end
 
   def count
@@ -29,32 +30,43 @@ class LinkedList
     group
   end
 
-  def append(surname)
+  def append(surname, supplies)
     current = @head
     if @head.nil?
-      @head = Node.new(surname)
+      @head = Node.new(surname, supplies)
       else until current.next_node.nil?
         current = current.next_node
       end
-      current.next_node = Node.new(surname)
+      current.next_node = Node.new(surname, supplies)
     end
+    add_supplies(supplies)
   end
 
-  def prepend(surname)
+  def prepend(surname, supplies)
     if head.nil?
-      @head = Node.new(surname)
+      @head = Node.new(surname, supplies)
     else new_node = @head
-      @head = Node.new(surname)
+      @head = Node.new(surname, supplies)
       @head.next_node = new_node
     end
+    add_supplies(supplies)
   end
 
-  def insert(position, surname)
+  def insert(position, surname, supplies)
     current = @head
     (position - 1).times { current = current.next_node }
-    new_node = Node.new(surname)
+    new_node = Node.new(surname, supplies)
     new_node.next_node = current.next_node
     current.next_node = new_node
+    add_supplies(supplies)
+  end
+
+  def add_supplies(supplies)
+    @supplies.merge!(supplies) { |_, supply, amount| supply + amount }
+  end
+
+  def supplies
+    @supplies
   end
 
   def find(position, total)

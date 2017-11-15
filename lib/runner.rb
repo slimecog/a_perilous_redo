@@ -8,23 +8,24 @@ wt = WagonTrain.new
 #
 # p list
 # p list.head
- # list.append("Brooks")
+ wt.append("Burke", {"pounds of food" => 200})
 # p list
 # p list.head
 # p list.head.next_node
- # list.append("Henderson")
+ wt.append("Hardy", {"spare wagon wheels" => 3})
 # p list.head.next_node
 # p list.count
 # p list.to_string
- # list.prepend("McKinney")
+ wt.prepend("McKinney", {"spare wagon wheels" => 3})
 # p list.count
 # p list.to_string
-#  list.insert(1, "Lawson")
+ wt.insert(1, "Lawson", {"spare wagon axles" => 3})
 # p list.to_string
 # p list.pop
 # p list.to_string
 # p list.pop
-# p list.to_string
-p wt
-p wt.append("Burke")
-p wt.append("West")
+p wt.to_string
+# p wt
+# p wt.append("Burke")
+# p wt.append("West")
+p wt.supplies
