@@ -71,7 +71,32 @@ class WagonTrainTest < Minitest::Test
     assert_equal 6, wt.supplies["spare wagon wheels"]
   end
 
+  def test_hunting_animals_are_random
+    wt = WagonTrain.new
 
+    wt.append("Burke", {"pounds of food" => 200})
 
+    assert_instance_of Array, wt.randomize_animals
+  end
+
+  def test_hunting_adds_animals_to_total_food_bagged
+    wt = WagonTrain.new
+
+    wt.append("Burke", {"pounds of food" => 200})
+
+    animals = wt.randomize_animals
+
+    refute_nil wt.total_food_bagged(animals)
+  end
+
+  def test_hunting_adds_food_to_supplies
+    wt = WagonTrain.new
+
+    wt.append("Burke", {"pounds of food" => 0})
+
+    refute_nil wt.supplies, wt.go_hunting
+    #this will fail from time to time as hunting will
+    #sometimes produce no new food
+  end
 
 end
