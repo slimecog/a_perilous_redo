@@ -13,6 +13,6 @@ class NodeTest < Minitest::Test
     node = Node.new("Burke", {"pounds of food" => 200})
 
     assert_equal "Burke", node.surname
-    assert_equal nil, node.next_node
+    assert_nil node.next_node
   end
 end

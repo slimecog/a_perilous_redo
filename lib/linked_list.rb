@@ -61,19 +61,19 @@ class LinkedList
     add_supplies(supplies)
   end
 
-  def add_supplies(supplies)
-    @supplies.merge!(supplies) { |_, supply, amount| supply + amount }
-  end
-
   def supplies
     @supplies
+  end
+
+  def add_supplies(supplies)
+    @supplies.merge!(supplies) { |_, supply, amount| supply + amount }
   end
 
   def find(position, total)
     current = @head
     if total <= 1
       position.times { current = current.next_node }
-      found = "The #{current.surname} family"
+      "The #{current.surname} family"
     else find_more(position, total)
     end
   end
